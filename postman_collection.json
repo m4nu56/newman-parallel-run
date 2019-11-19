@@ -1,0 +1,105 @@
+{
+	"info": {
+		"_postman_id": "797c42bb-24a5-4b7f-af65-6b81b319696d",
+		"name": "TAD OKINA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		
+		{
+			"name": "Identiti /api/person",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6d8c35cf-537f-4f8c-999a-f12a5af4b592",
+						"exec": [
+							"pm.test(\"List of users is here!\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    const persons = jsonData.map(person => person.id);",
+							"    pm.environment.set(\"personIds\", persons);",
+							"    pm.environment.set(\"personId\", persons[0]);",
+							"    postman.setNextRequest('Identiti /api/person/id')",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token_tad}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{identiti}}/api/person/",
+					"host": [
+						"{{identiti}}"
+					],
+					"path": [
+						"api",
+						"person",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Identiti /api/person/id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3da8cdbd-1f8e-499c-8af5-2cb5f470941d",
+						"exec": [
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"let personIds = pm.environment.get(\"personIds\");",
+							"const personId = personIds.pop();",
+							"pm.environment.set(\"personId\", personId);",
+							"pm.environment.set(\"personIds\", personIds);",
+							"",
+							"console.log(personId)",
+							"if(personId){",
+							"    postman.setNextRequest('Identiti /api/person/id')",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{token_tad}}"
+					}
+				],
+				"url": {
+					"raw": "{{identiti}}/api/person/{{personId}}",
+					"host": [
+						"{{identiti}}"
+					],
+					"path": [
+						"api",
+						"person",
+						"{{personId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
