@@ -1,19 +1,21 @@
-var path = require('path'),
-    async = require('async'), //https://www.npmjs.com/package/async
-    newman = require('newman'),
+const path = require('path')
+const async = require('async')
+const newman = require('newman')
 
-    parametersForTestRun = {
-        collection: path.join(__dirname, 'postman_collection.json'), // your collection
-        environment: path.join(__dirname, 'integ.postman_environment.json'), //your env
-        reporters: 'cli'
-    };
+const PARALLEL_RUN_COUNT = 2
+
+const parametersForTestRun = {
+    collection: path.join(__dirname, 'postman/postman_collection.json'), // your collection
+    environment: path.join(__dirname, 'postman/localhost.postman_environment.json'), //your env
+    reporters: 'cli'
+};
 
 parallelCollectionRun = function (done) {
     newman.run(parametersForTestRun, done);
 };
 
 let commands = []
-for (let index = 0; index < 5; index++) {
+for (let index = 0; index < PARALLEL_RUN_COUNT; index++) {
     commands.push(parallelCollectionRun);
 }
 
