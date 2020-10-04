@@ -1,0 +1,61 @@
+{
+	"info": {
+		"_postman_id": "9ded8a71-0e45-4d04-9aad-188f78239bf4",
+		"name": "Perso",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "newman-parallel-run",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ae7acda5-81c9-4312-93c4-4ffa8a63d8df",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    const jsonData = pm.response.json();",
+							"    jsonData.docs.forEach(doc => console.log(doc.full_url + \"/export?format=json\"))",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://openlibrary.org/search/lists.json?q=book&limit=20&offset=0",
+					"protocol": "http",
+					"host": [
+						"openlibrary",
+						"org"
+					],
+					"path": [
+						"search",
+						"lists.json"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "book"
+						},
+						{
+							"key": "limit",
+							"value": "20"
+						},
+						{
+							"key": "offset",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

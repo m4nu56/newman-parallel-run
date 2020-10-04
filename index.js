@@ -5,8 +5,7 @@ const newman = require('newman')
 const PARALLEL_RUN_COUNT = 2
 
 const parametersForTestRun = {
-    collection: path.join(__dirname, 'postman/postman_collection.json'), // your collection
-    environment: path.join(__dirname, 'postman/localhost.postman_environment.json'), //your env
+    collection: path.join(__dirname, 'postman/postman_collection_open_source.json'), // your collection
     reporters: 'cli'
 };
 
