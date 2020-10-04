@@ -1,7 +1,12 @@
 # Running multiple Postman Collection in parallel
 
 A known limitation of the Postman Collection Runner is that it can only execute collection in a consecutive way. 
-This is just a simple implementation of the solution explained in this [StackOverflow conversation](https://stackoverflow.com/a/41181892/2042761). 
+
+This project is a simple implementation of the solution explained in this [StackOverflow conversation](https://stackoverflow.com/a/41181892/2042761).
+
+## Recent changes
+
+Added a new postman collection that call for a public api: [https://openlibrary.org/dev/docs/api/lists](https://openlibrary.org/dev/docs/api/lists) so the project can be run right away after checkout. 
 
 ## Create your Postman Collection and corresponding tests
 
